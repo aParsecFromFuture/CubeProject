@@ -21,7 +21,7 @@
 		this.coords[7] = new vector(size,size,size);
 	        //döndürme fonksiyonu
 	        this.rotate = function(type,angle){
-			for(i = 0;i < 8;i++){
+			for(i = 0;i < this.coords.length;i++){
 			var v = this.coords[i];
 			var x = v.x;
 			var y = v.y;
