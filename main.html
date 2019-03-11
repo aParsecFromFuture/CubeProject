@@ -1,0 +1,69 @@
+<html>
+<body>
+<canvas id="myCanvas" width="500" height="500" style="border:4px solid black"></canvas>
+<script>
+	function vector(x = 0,y = 0,z = 0){
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	};	
+
+	function cube(size){
+		this.coords = [];
+		//köşegenler
+		this.coords[0] = new vector(0,0,0);
+		this.coords[1] = new vector(size,0,0);
+		this.coords[2] = new vector(0,size,0);
+		this.coords[3] = new vector(size,size,0);
+		this.coords[4] = new vector(0,0,size);
+		this.coords[5] = new vector(size,0,size);
+		this.coords[6] = new vector(0,size,size);
+		this.coords[7] = new vector(size,size,size);
+	        //döndürme fonksiyonu
+	        this.rotate = function(type,angle){
+			for(i = 0;i < 8;i++){
+			var v = this.coords[i];
+			var x = v.x;
+			var y = v.y;
+			var z = v.z;
+			switch(type){
+			case "x" :
+				v.y = y*Math.cos(angle) - z*Math.sin(angle);
+				v.z = y*Math.sin(angle) + z*Math.cos(angle);
+				break;
+			case "y" :
+				v.x = x*Math.cos(angle) - z*Math.sin(angle);
+				v.z = x*Math.sin(angle) + z*Math.cos(angle);
+				break;
+				case "z" :
+				v.x = x*Math.cos(angle) - y*Math.sin(angle);
+				v.y = x*Math.sin(angle) + y*Math.cos(angle);
+			 	break;
+				}
+		   	}
+	     	}
+	}
+
+	var cube = new cube(100,document.getElementById("myCanvas"));
+	
+	function animate(cube){
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		ctx.beginPath();
+		ctx.clearRect(0,0,c.width,c.height);
+	 	//kübü sayfanın ortasına taşımak için
+	   	ctx.translate(c.width / 2,c.height / 2);
+	 	cube.rotate("x",0.1);
+	  	cube.rotate("y",0.1);
+	     	cube.rotate("z",0.1);
+	     	cube.coords.forEach(function(v){
+			ctx.moveTo(v.x,v.y);
+			ctx.arc(v.x,v.y,3,0,2*Math.PI);
+		});
+	ctx.fill();
+	ctx.resetTransform();
+	}
+	setInterval(function(){animate(cube)},30);
+</script>
+</body>
+</html>
