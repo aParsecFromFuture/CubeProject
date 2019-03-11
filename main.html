@@ -60,7 +60,24 @@
 			ctx.moveTo(v.x,v.y);
 			ctx.arc(v.x,v.y,3,0,2*Math.PI);
 		});
-	ctx.fill();
+		var v = cube.coords;
+		ctx.moveTo(v[0].x,v[0].y);
+		ctx.lineTo(v[1].x,v[1].y);
+		ctx.lineTo(v[3].x,v[3].y);
+		ctx.lineTo(v[2].x,v[2].y);
+		ctx.lineTo(v[0].x,v[0].y);
+		ctx.lineTo(v[4].x,v[4].y);
+		ctx.lineTo(v[5].x,v[5].y);
+		ctx.lineTo(v[7].x,v[7].y);
+		ctx.lineTo(v[6].x,v[6].y);
+		ctx.lineTo(v[4].x,v[4].y);
+		ctx.moveTo(v[1].x,v[1].y);
+		ctx.lineTo(v[5].x,v[5].y);
+		ctx.moveTo(v[2].x,v[2].y);
+		ctx.lineTo(v[6].x,v[6].y);
+		ctx.moveTo(v[3].x,v[3].y);
+		ctx.lineTo(v[7].x,v[7].y);
+	ctx.stroke();
 	ctx.resetTransform();
 	}
 	setInterval(function(){animate(cube)},30);
